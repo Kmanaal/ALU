@@ -1,0 +1,15 @@
+module AddSub(Cout, S, A, B, Cin, op);
+    input [4:0] A, B;
+    input Cin;
+    input [1:0] op;
+    output reg [4:0] S;
+    output reg Cout;
+
+    always @(A, B, Cin, op)
+    begin
+        if (op == 2'b00)
+            {Cout, S} = A + B + Cin;    // ADDITION
+        else if (op == 2'b01)
+            {Cout, S} = A - B - Cin;    // SUBTRACTION
+    end
+endmodule
