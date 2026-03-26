@@ -1,0 +1,34 @@
+module ALU2(K, A, B, Op, segments, Cin);
+    input [4:0] A, B;
+    input [1:0] Op;
+    input Cin;
+    output reg [7:1] segments;
+    output reg [15:0] K;
+
+    wire d;
+    wire [4:0] e;
+    wire [15:0] f;
+
+    AddSub r(.Cout(d), .S(e), .A(A), .B(B), .Cin(Cin), .op(Op));
+    mul2 m(.p(f), .a(A), .b(B), .op(Op));
+
+    always @(Op, e, f)
+    begin
+        case (Op)
+            2'b00: K = {11'b0, e};
+            2'b01: K = {11'b0, e};
+            2'b10: K = f;
+            default: K = 16'b0;
+        endcase
+    end
+
+    always @(Op)
+    begin
+        case (Op)
+            2'b00: segments = 7'b1000000;
+            2'b01: segments = 7'b1111001;
+            2'b10: segments = 7'b0110000;
+            default: segments = 7'b1111111;
+        endcase
+    end
+endmodule
