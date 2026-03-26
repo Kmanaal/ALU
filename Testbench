@@ -1,0 +1,35 @@
+module ALU2_tb;
+    reg [4:0] A, B;
+    reg [1:0] Op;
+    reg Cin;
+    wire [7:1] segments;
+    wire [15:0] K;
+
+    ALU2 uut(.A(A), .B(B), .Op(Op), .segments(segments), .K(K), .Cin(Cin));
+
+    initial begin
+        // Test case 1
+        A = 5'b01010;
+        B = 5'b01010;
+        Op = 2'b00;
+        Cin = 1'b0;
+        #10;
+        $display("Test case 1: K = %b, A = %b, B = %b, Op = %b, Cin = %b, segments = %b", K, A, B, Op, Cin, segments);
+
+        // Test case 2
+        A = 5'b01010;
+        B = 5'b01010;
+        Op = 2'b01;
+        Cin = 1'b0;
+        #10;
+        $display("Test case 2: K = %b, A = %b, B = %b, Op = %b, Cin = %b, segments = %b", K, A, B, Op, Cin, segments);
+
+        // Test case 3
+        A = 5'b01010;
+        B = 5'b01010;
+        Op = 2'b10;
+        Cin = 1'b0; // Not used for multiplication
+        #10;
+        $display("Test case 3: K = %b, A = %b, B = %b, Op = %b, Cin %b (not used for multiplication), segments = %b", K, A, B, Op, Cin, segments);
+    end
+endmodule
